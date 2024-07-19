@@ -1,14 +1,20 @@
+import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BankAccount {
     private String customer_name;
     private String account_type;
     private int account_number;
     private int balance;
+    public List<String> transactionHistory;
 
     public BankAccount(String customer_name, String account_type, int account_number, int balance){
         this.customer_name = customer_name;
         this.account_type = account_type;
         this.account_number = account_number;
         this.balance = balance;
+        this.transactionHistory = new ArrayList<>();
     }
 
     //getter for name
@@ -57,8 +63,9 @@ public abstract class BankAccount {
             throw new IllegalArgumentException("Deposit amount must be positive.");
         }
         balance += amount;
+        transactionHistory.add("Deposit: " + amount);
     }
-    public void withdrawal(int amount){
+    public void withdraw(int amount){
         if (amount <= 0) {
             throw new IllegalArgumentException("Withdrawal amount must be positive.");
         }
@@ -66,6 +73,11 @@ public abstract class BankAccount {
             throw new IllegalArgumentException("Insufficient funds.");
         }
         balance -= amount;
+        transactionHistory.add("Withdrawal: " + amount);
+    }
+
+    public List<String> getTransactionHistory() {
+        return transactionHistory;
     }
 
     public abstract void monthlyMaintenance();

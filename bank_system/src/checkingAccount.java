@@ -1,7 +1,9 @@
+import java.util.List;
+
 public class CheckingAccount extends BankAccount {
     private int fee;
 
-    public CheckingAccount(String customer_name, String account_type, int account_number, int balance, int fee){
+    public CheckingAccount(String customer_name, int account_number, int balance, int fee){
         super(customer_name, "Checking", account_number, balance);
         this.fee = fee;
     }
@@ -16,11 +18,14 @@ public class CheckingAccount extends BankAccount {
         this.fee = fee;
     }
 
-    public void processDeposit(int amount) {
+    @Override
+    public void deposit(int amount) {
         if (amount > 0) {
             int netDeposit = amount - fee;
             if (netDeposit > 0) {
                 deposit(netDeposit);
+                getTransactionHistory().add("Deposit: " + amount + " (Fee: " + fee + ")");
+                System.out.println("Deposited " + netDeposit + " after fee. New balance: " + getBalance());
             } else {
                 System.out.println("Deposit amount must be greater than the fee.");
             }
@@ -30,28 +35,25 @@ public class CheckingAccount extends BankAccount {
     }
 
     @Override
-    public void deposit(int amount) {
-        if (amount > 0) {
-            setBalance(getBalance() + amount);
-            System.out.println("Deposited " + amount + ". New balance: " + getBalance());
-        } else {
-            System.out.println("Deposit amount must be positive.");
-        }
-    }
-
-    @Override
-    public void withdrawal(int amount) {
-        if (amount > 0 && getBalance() >= amount) {
-            setBalance(getBalance() - amount);
-            System.out.println("Withdrew " + amount + ". New balance: " + getBalance());
+    public void withdraw(int amount) {
+        if (amount > 0 && getBalance() >= amount + fee) {
+            setBalance(getBalance() - amount - fee);
+            getTransactionHistory().add("Withdrawal: " + amount + " (Fee: " + fee + ")");
+            System.out.println("Withdrew " + amount + " after fee. New balance: " + getBalance());
         } else {
             System.out.println("Invalid withdrawal amount or insufficient balance.");
         }
     }
 
     @Override
+    public List<String> getTransactionHistory(){
+        return super.getTransactionHistory();
+    }
+
+    @Override
     public void monthlyMaintenance(){
-        withdrawal(fee);
+        withdraw(fee);
+        getTransactionHistory().add("Monthly Maintenance Fee: " + fee);
     }
 
 }

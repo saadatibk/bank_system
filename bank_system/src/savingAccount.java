@@ -1,7 +1,9 @@
-public class SavingAccount extends BankAccount {
-    private static double interest_rate; //interest rate in percentage
+import java.util.List;
 
-    public SavingAccount(String customer_name, String account_type, int account_number, int balance, int interest_rate){
+public class SavingAccount extends BankAccount {
+    private double interest_rate; 
+
+    public SavingAccount(String customer_name, int account_number, int balance, double interest_rate){
         super(customer_name, "Savings", account_number, balance);
         this.interest_rate = interest_rate;
     }
@@ -12,7 +14,7 @@ public class SavingAccount extends BankAccount {
     }
 
     // Setter for interest rate
-    public void setInterestRate(int interest_rate) {
+    public void setInterestRate(double interest_rate) {
         this.interest_rate = interest_rate;
     } 
 
@@ -34,12 +36,17 @@ public class SavingAccount extends BankAccount {
     }
 
     @Override
-    public void withdrawal(int amount) {
+    public void withdraw(int amount) {
         if (amount > 0 && getBalance() >= amount) {
             setBalance(getBalance() - amount);
             System.out.println("Withdrew " + amount + ". New balance: " + getBalance());
         } else {
             System.out.println("Invalid withdrawal amount or insufficient balance.");
         }
+    }
+
+    @Override
+    public List<String> getTransactionHistory(){
+        return super.getTransactionHistory();
     }
 }
