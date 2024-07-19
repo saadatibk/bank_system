@@ -1,13 +1,13 @@
-public class savingAccount extends bankAccount {
-    private int interest_rate; //interest rate in percentage
+public class SavingAccount extends BankAccount {
+    private static double interest_rate; //interest rate in percentage
 
-    public savingAccount(String customer_name, String account_type, int account_number, int balance, int interest_rate){
-        super(customer_name, account_type, account_number, balance);
+    public SavingAccount(String customer_name, String account_type, int account_number, int balance, int interest_rate){
+        super(customer_name, "Savings", account_number, balance);
         this.interest_rate = interest_rate;
     }
 
     // Getter for interest rate
-       public int getInterestRate() {
+       public double getInterestRate() {
         return interest_rate;
     }
 
@@ -16,9 +16,10 @@ public class savingAccount extends bankAccount {
         this.interest_rate = interest_rate;
     } 
 
-    public void calculateInterest(){
-        int interest = (getBalance() * interest_rate) / 100;
-        setBalance(getBalance() + interest);
+    @Override
+    public void monthlyMaintenance() {
+        int interest = (int) (getBalance() * interest_rate);
+        deposit(interest);
         System.out.println("Interest added" + interest + ". New balance: " + getBalance());
     }
 

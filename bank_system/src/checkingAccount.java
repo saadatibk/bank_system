@@ -1,8 +1,8 @@
-public class checkingAccount extends bankAccount {
+public class CheckingAccount extends BankAccount {
     private int fee;
 
-    public checkingAccount(String customer_name, String account_type, int account_number, int balance, int fee){
-        super(customer_name, account_type, account_number, balance);
+    public CheckingAccount(String customer_name, String account_type, int account_number, int balance, int fee){
+        super(customer_name, "Checking", account_number, balance);
         this.fee = fee;
     }
 
@@ -47,6 +47,11 @@ public class checkingAccount extends bankAccount {
         } else {
             System.out.println("Invalid withdrawal amount or insufficient balance.");
         }
+    }
+
+    @Override
+    public void monthlyMaintenance(){
+        withdrawal(fee);
     }
 
 }

@@ -1,10 +1,10 @@
-public abstract class bankAccount {
+public abstract class BankAccount {
     private String customer_name;
     private String account_type;
     private int account_number;
     private int balance;
 
-    public bankAccount(String customer_name, String account_type, int account_number, int balance){
+    public BankAccount(String customer_name, String account_type, int account_number, int balance){
         this.customer_name = customer_name;
         this.account_type = account_type;
         this.account_number = account_number;
@@ -52,7 +52,21 @@ public abstract class bankAccount {
     }
 
     // Abstract methods for deposit and withdrawal
-    public abstract void deposit(int amount);
-    public abstract void withdrawal(int amount);
-    
+    public void deposit(int amount){
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Deposit amount must be positive.");
+        }
+        balance += amount;
+    }
+    public void withdrawal(int amount){
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Withdrawal amount must be positive.");
+        }
+        if (amount > balance) {
+            throw new IllegalArgumentException("Insufficient funds.");
+        }
+        balance -= amount;
+    }
+
+    public abstract void monthlyMaintenance();
 }
