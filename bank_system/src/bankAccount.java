@@ -80,5 +80,9 @@ public abstract class BankAccount {
         return transactionHistory;
     }
 
+    public void setTransactionHistory(List<String> transactionHistory) {
+        this.transactionHistory = transactionHistory;
+    }
+
     public abstract void monthlyMaintenance();
 }

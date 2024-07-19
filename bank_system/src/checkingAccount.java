@@ -23,7 +23,7 @@ public class CheckingAccount extends BankAccount {
         if (amount > 0) {
             int netDeposit = amount - fee;
             if (netDeposit > 0) {
-                deposit(netDeposit);
+                setBalance(getBalance() + netDeposit);
                 getTransactionHistory().add("Deposit: " + amount + " (Fee: " + fee + ")");
                 System.out.println("Deposited " + netDeposit + " after fee. New balance: " + getBalance());
             } else {
@@ -46,14 +46,10 @@ public class CheckingAccount extends BankAccount {
     }
 
     @Override
-    public List<String> getTransactionHistory(){
-        return super.getTransactionHistory();
-    }
-
-    @Override
-    public void monthlyMaintenance(){
+    public void monthlyMaintenance() {
         withdraw(fee);
         getTransactionHistory().add("Monthly Maintenance Fee: " + fee);
     }
 
+   
 }

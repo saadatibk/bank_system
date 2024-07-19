@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class SavingAccount extends BankAccount {
-    private double interest_rate; 
+    private double interest_rate ; 
 
     public SavingAccount(String customer_name, int account_number, int balance, double interest_rate){
         super(customer_name, "Savings", account_number, balance);
@@ -22,6 +22,7 @@ public class SavingAccount extends BankAccount {
     public void monthlyMaintenance() {
         int interest = (int) (getBalance() * interest_rate);
         deposit(interest);
+        getTransactionHistory().add("Monthly maintenance: " + interest);
         System.out.println("Interest added" + interest + ". New balance: " + getBalance());
     }
 
@@ -29,6 +30,7 @@ public class SavingAccount extends BankAccount {
     public void deposit(int amount) {
         if (amount > 0) {
             setBalance(getBalance() + amount);
+            getTransactionHistory().add("Deposit: " + amount);
             System.out.println("Deposited " + amount + ". New balance: " + getBalance());
         } else {
             System.out.println("Deposit amount must be positive.");
@@ -39,14 +41,11 @@ public class SavingAccount extends BankAccount {
     public void withdraw(int amount) {
         if (amount > 0 && getBalance() >= amount) {
             setBalance(getBalance() - amount);
+            getTransactionHistory().add("Withdrawal: " + amount);
             System.out.println("Withdrew " + amount + ". New balance: " + getBalance());
         } else {
             System.out.println("Invalid withdrawal amount or insufficient balance.");
         }
     }
 
-    @Override
-    public List<String> getTransactionHistory(){
-        return super.getTransactionHistory();
-    }
 }
