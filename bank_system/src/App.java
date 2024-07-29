@@ -1,10 +1,10 @@
 public class App {
     public static void main(String[] args) throws Exception {
-       CheckingAccount checkingAcc = new CheckingAccount("Saadat", 001, 0, 12);
+       checkingAccount checkingAcc = new checkingAccount("Saadat", 001, 0, 12);
        checkingAcc.deposit(1000);
        checkingAcc.withdraw(250);
 
-       SavingAccount savingAcc = new SavingAccount("Tom", 2, 200, 0.05);
+       savingAccount savingAcc = new savingAccount("Tom", 2, 200, 0.05);
        savingAcc.monthlyMaintenance();
        savingAcc.deposit(100);
        
