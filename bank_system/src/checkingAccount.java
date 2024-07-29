@@ -1,9 +1,9 @@
 import java.util.List;
 
-public class CheckingAccount extends BankAccount {
+public class checkingAccount extends bankAccount {
     private int fee;
 
-    public CheckingAccount(String customer_name, int account_number, int balance, int fee){
+    public checkingAccount(String customer_name, int account_number, int balance, int fee){
         super(customer_name, "Checking", account_number, balance);
         this.fee = fee;
     }

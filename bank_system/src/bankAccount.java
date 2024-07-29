@@ -2,14 +2,14 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BankAccount {
+public abstract class bankAccount {
     private String customer_name;
     private String account_type;
     private int account_number;
     private int balance;
     public List<String> transactionHistory;
 
-    public BankAccount(String customer_name, String account_type, int account_number, int balance){
+    public bankAccount(String customer_name, String account_type, int account_number, int balance){
         this.customer_name = customer_name;
         this.account_type = account_type;
         this.account_number = account_number;

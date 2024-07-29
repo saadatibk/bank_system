@@ -1,9 +1,9 @@
 import java.util.List;
 
-public class SavingAccount extends BankAccount {
+public class savingAccount extends bankAccount {
     private double interest_rate ; 
 
-    public SavingAccount(String customer_name, int account_number, int balance, double interest_rate){
+    public savingAccount(String customer_name, int account_number, int balance, double interest_rate){
         super(customer_name, "Savings", account_number, balance);
         this.interest_rate = interest_rate;
     }
